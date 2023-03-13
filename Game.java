@@ -30,6 +30,16 @@ public class Game
     }
 
     /**
+     * Print out a list of valid command words,
+     * like in the Parser class.
+     */
+    public void showCommands()
+    {
+        System.out.println("Your command words are:");
+        parser.showCommands();
+    }
+    
+    /**
      * Create all the rooms and link their exits together.
      */
     private void createRooms()
