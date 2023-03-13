@@ -3,10 +3,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 /**
- * Class Room - a room in an adventure game.
- *
- * This class is part of the "World of Zuul" application. 
- * "World of Zuul" is a very simple, text based adventure game.  
+ * Class Room - a room in this adventure game.
  *
  * A "Room" represents one location in the scenery of the game.  It is 
  * connected to other rooms via exits.  For each existing exit, the room 
@@ -20,6 +17,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;  // stores exits of this room.
+    private HashMap<String, Room> items;  // stores items in a room.
 
     /**
      * Create a room described "description". Initially, it has
@@ -33,6 +31,18 @@ public class Room
         exits = new HashMap<>();
     }
 
+    /**
+     * Create an item description. This helps indicate
+     * which item you are holding onto, its condition, and so on.
+     * 
+     * @param description The item's description.
+     */
+    public void Item(String description) 
+    {
+        this.description = description;
+        items = new HashMap<>();
+    }
+    
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.

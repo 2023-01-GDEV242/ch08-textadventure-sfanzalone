@@ -17,14 +17,17 @@
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
+    private Room currentRoom; //The current room you're in.
+    private Room currentItem; //The current item you're holding.
         
     /**
-     * Create the game and initialise its internal map.
+     * Create the game and initialise its internal map,
+     * and the items within its map.
      */
     public Game() 
     {
-        createRooms();
+        createRooms(); //Creates rooms
+        createRooms(); //Creates items
         parser = new Parser();
     }
 
@@ -39,7 +42,7 @@ public class Game
     }
     
     /**
-     * Create all the rooms and link their exits together.
+     * Creates all the rooms and their exits and exit links.
      */
     private void createRooms()
     {
@@ -117,6 +120,47 @@ public class Game
         currentRoom = outside;  // start game outside
     }
 
+    /**
+     * Creates all the items that can be found in each room.
+     */
+    private void createItems()
+    {
+        Room crowbar, apple, pencil, officeKey, janitorKey,
+            almightyKey, sandwich, rotApple, rotSandwich;
+      
+        // create the items
+        crowbar = new Room("Helps with prying doors open.  It " +
+                            "might even make for a good " +
+                            "backtracking tool./n/n" +
+                            "Weight: 1.32 lbs.");
+        apple = new Room("Great snack to keep the doctor away, " +
+                            "and to keep you healthy./n/n" +
+                            "Weight: 0.33 lbs.");
+        pencil = new Room("A standard No. 2 pencil.  Doesn't " +
+                            "go beyond that./n/n" +
+                            "Weight: 0.01 lbs.");
+        officeKey = new Room("Gives you access to the office." +
+                                "Weight: About 2.2 lbs.");
+        janitorKey = new Room("Gives you access to the boiler room." +
+                                "Weight: About 2.2 lbs.");
+        almightyKey = new Room("Same as the other keys, but " +
+                                "now you unlock every door in this " +
+                                "adventure!  This key has" +
+                                "no limitations!/n/n" +
+                                "Weight: About 2.2 lbs.");
+        sandwich = new Room("Bacon, lettuce, and tomato.  What " +
+                            "more can you ask for!?/n/n" +
+                            "Weight: 2.18 lbs.");
+        rotApple = new Room("A snack that wasn't touched for " +
+                            "several weeks. You want to eat a " +
+                            "decaying fruit?/n/n" +
+                            "Weight: 0.15 lbs.");
+        rotSandwich = new Room("Bacon, lettuce, and terrible!  " +
+                                "The contents expired, and the " +
+                                "bread is moldy./n/n" +
+                                "Weight: 2.18 lbs.");
+    }
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -241,6 +285,46 @@ public class Game
         }
     }
 
+    /** 
+     * Obtain an item within a room. If the item is helpful,
+     * collect it.  Otherwise, provide an error message.
+     */
+    private void getItem(Command command) 
+    {
+        if(!command.hasSecondWord())
+        {
+            //if there is no second word, we don't know if the item
+            //is helpful or not...
+            System.out.println("Collect or consume it?");
+            
+            return;
+        }
+
+        String direction = command.getSecondWord();
+
+        // Try to leave current room.
+        Room nextRoom = currentRoom.getExit(direction);
+        Room nextItem = currentItem.getExit(direction);
+
+        if(nextRoom == null)
+        {
+            System.out.println("There is no item!");
+        }
+        
+        else if(nextItem == null)
+        {
+            System.out.println("This looks bad!");
+            //Saying poisonous instead does get the point across,
+            //but doing so means you're addressing a food item.
+        }
+        
+        else
+        {
+            currentRoom = nextRoom;
+            System.out.println(currentRoom.getLongDescription());
+        }
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
