@@ -11,8 +11,8 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Salvatore Anzalone
+ * @version 3/13/2023
  */
 
 public class Game 
@@ -34,7 +34,9 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, bathroom,
+            lounge, library, boiler, bookstore, coffee, observatory,
+            gymnasium, study, empty;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -42,6 +44,22 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        bathroom = new Room("in a bathroom");
+        lounge = new Room("in the student lounge");
+        library = new Room("in the library");
+        boiler = new Room("in a boiler room.  Janitors are allowed in " +
+                            "here, so make it quick!");
+        bookstore = new Room("in the bookstore");
+        coffee = new Room("in a coffee shop.  You can make something " +
+                            "to drink, if you want to.");
+        observatory = new Room("in the observatory.  Great for " +
+                                "viewing projections of stars, and " +
+                                "much more!");
+        gymnasium = new Room("in the gymnasium");
+        study = new Room("in a study room.  This is meant for " +
+                            "test taking and preparation.");
+        empty = new Room("in an empty room.  Was it going " +
+                            "to be a standard classroom?");
         
         // initialise room exits
         outside.setExit("east", theater);
@@ -56,6 +74,36 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        bathroom.setExit("east", theater);
+        
+        lounge.setExit("west", outside);
+        lounge.setExit("east", empty);
+        lounge.setExit("south", study);
+        
+        library.setExit("south", office);
+        library.setExit("north", outside);
+        library.setExit("east", pub);
+        
+        boiler.setExit("west", lab);
+        
+        bookstore.setExit("east", library);
+        bookstore.setExit("west", coffee);
+        
+        coffee.setExit("east", bookstore);
+        coffee.setExit("south", lounge);
+        
+        observatory.setExit("south", outside);
+        
+        gymnasium.setExit("north", empty);
+        gymnasium.setExit("south", outside);
+        
+        study.setExit("north", lounge);
+        
+        empty.setExit("west", lounge);
+        empty.setExit("south", gymnasium);
+        empty.setExit("east", pub);
+        empty.setExit("north", outside);
 
         currentRoom = outside;  // start game outside
     }
