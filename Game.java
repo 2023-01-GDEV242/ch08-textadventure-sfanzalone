@@ -1,8 +1,7 @@
-/**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
+/** 
+ *  Welcome to the World of Zuul!  This text adventure game has users 
+ *  walking around some scenery, which is represented in the form
+ *  of an empty university!
  * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
@@ -125,14 +124,17 @@ public class Game
     {            
         printWelcome();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
+        // Enter the main command loop.  Here we repeatedly read commands
+        // and execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        
+        while (! finished)
+        {
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
+        
         System.out.println("Thank you for playing.  Good bye.");
     }
 
@@ -143,8 +145,10 @@ public class Game
     {
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
+        System.out.println("This is a text adventure game that puts " +
+                            "you in an empty university!");
+        System.out.println("Type '" + CommandWord.HELP +
+                            "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
@@ -160,7 +164,8 @@ public class Game
 
         CommandWord commandWord = command.getCommandWord();
 
-        switch (commandWord) {
+        switch (commandWord)
+        {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
                 break;
@@ -173,10 +178,19 @@ public class Game
                 goRoom(command);
                 break;
 
+            case LOOK:
+                System.out.println("This is an item.");
+                break;
+                
+            case EAT:
+                System.out.println("It looks tasty.  Should I eat it," +
+                " save it, or toss it?");
+                
             case QUIT:
                 wantToQuit = quit(command);
                 break;
         }
+        
         return wantToQuit;
     }
 
@@ -202,9 +216,11 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
+        if(!command.hasSecondWord())
+        {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
+            
             return;
         }
 
@@ -213,10 +229,13 @@ public class Game
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
-        if (nextRoom == null) {
+        if (nextRoom == null)
+        {
             System.out.println("There is no door!");
         }
-        else {
+        
+        else
+        {
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
@@ -229,11 +248,15 @@ public class Game
      */
     private boolean quit(Command command) 
     {
-        if(command.hasSecondWord()) {
+        if(command.hasSecondWord())
+        {
             System.out.println("Quit what?");
+            
             return false;
         }
-        else {
+        
+        else
+        {
             return true;  // signal that we want to quit
         }
     }
