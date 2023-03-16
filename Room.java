@@ -10,7 +10,7 @@ import java.util.Iterator;
  * stores a reference to the neighboring room.
  * 
  * @author  Salvatore Anzalone
- * @version 3/13/2023
+ * @version 3/16/2023
  */
 
 public class Room 
@@ -82,9 +82,12 @@ public class Room
     {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
-        for(String exit : keys) {
+        
+        for(String exit : keys)
+        {
             returnString += " " + exit;
         }
+        
         return returnString;
     }
 

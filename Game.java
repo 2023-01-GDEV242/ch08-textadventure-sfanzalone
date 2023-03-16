@@ -11,7 +11,7 @@
  *  executes the commands that the parser returns.
  * 
  * @author  Salvatore Anzalone
- * @version 3/13/2023
+ * @version 3/16/2023
  */
 
 public class Game 
@@ -42,7 +42,56 @@ public class Game
     }
     
     /**
+     * Creates all the items that can be found in each room.
+     */
+    private void createItems()
+    {
+        Room none, crowbar, apple, pencil, officeKey, janitorKey,
+            almightyKey, sandwich, rotApple, rotSandwich;
+        
+        // create the items
+        none = new Room("You have no item on you.");
+        
+        crowbar = new Room("Helps with prying doors open.  It " +
+                            "might even make for a good " +
+                            "backtracking tool./n/n" +
+                            "Weight: 1.32 lbs.");
+        apple = new Room("Great snack to keep the doctor away, " +
+                            "and to keep you healthy./n/n" +
+                            "Weight: 0.33 lbs.");
+        pencil = new Room("A standard No. 2 pencil.  Doesn't " +
+                            "go beyond that./n/n" +
+                            "Weight: 0.01 lbs.");
+        officeKey = new Room("Gives you access to the office." +
+                                "Weight: About 2.2 lbs.");
+        janitorKey = new Room("Gives you access to the boiler room." +
+                                "Weight: About 2.2 lbs.");
+        almightyKey = new Room("Same as the other keys, but " +
+                                "now you unlock every door in this " +
+                                "adventure!  This key has" +
+                                "no limitations!/n/n" +
+                                "Weight: About 2.2 lbs.");
+        sandwich = new Room("Bacon, lettuce, and tomato.  What " +
+                            "more can you ask for!?/n/n" +
+                            "Weight: 2.18 lbs.");
+        rotApple = new Room("A snack that wasn't touched for " +
+                            "several weeks. You want to eat a " +
+                            "decaying fruit?/n/n" +
+                            "Weight: 0.15 lbs.");
+        rotSandwich = new Room("Bacon, lettuce, and terrible!  " +
+                                "The contents are expired, and the " +
+                                "bread is moldy./n/n" +
+                                "Weight: 2.18 lbs.");
+        
+        currentItem = none; //Nothing was obtained
+    }
+    
+    /**
      * Creates all the rooms and their exits and exit links.
+     * However, some rooms are locked, and some have trap doors,
+     * preventing you from being able to backtrack.  Luckily,
+     * they have someone in the room with a hint on how you can access
+     * other rooms.
      */
     private void createRooms()
     {
@@ -117,48 +166,57 @@ public class Game
         empty.setExit("east", pub);
         empty.setExit("north", outside);
 
+        //Meant to give a quick summary of what two major items do
+        Room crowbar = new Room("Summary: Pries open doors, " +
+                                "and helps with backtracking/n/n" +
+                                "Weight: 1.32 lbs.");
+        Room almightyKey = new Room("Summary: Gives access to all rooms" +
+                                    "Weight: About 2.2 lbs.");
+        
+        if(currentRoom == empty || currentRoom == gymnasium)
+        {
+            System.out.println("/n/nIt's locked!  It needs to " +
+                                "be pried opened.");
+        }
+        
+        else if(currentItem == crowbar && currentRoom == empty ||
+                currentItem == crowbar && currentRoom == gymnasium)
+        {
+            System.out.println("/n/nThe door is pried opened!");
+        }
+        
+        
+        if(currentRoom == coffee)
+        {
+            System.out.println("/n/nIt's locked!  Is there a " +
+                                "key you can get to enter the " +
+                                "coffee shop?");
+        }
+        
+        else if(currentItem == almightyKey && currentRoom == coffee)
+        {
+            System.out.println("/n/nThe door is unlocked!");
+        }
+        
+        if(currentRoom == library || currentRoom == boiler)
+        {
+            System.out.println("/n/nYou cannot go to the previous " +
+                                "room.  Surely, you chose wisely.");
+        }
+        
+        if(currentRoom == library)
+        {
+            System.out.println("/n/nHead outside, and go to " +
+                                "the gymnasium.  Good luck!");
+        }
+        
+        else if(currentRoom == boiler)
+        {
+            System.out.println("/n/nGo to the office, and be " +
+                                "swift!  A special key awaits!");
+        }
+        
         currentRoom = outside;  // start game outside
-    }
-
-    /**
-     * Creates all the items that can be found in each room.
-     */
-    private void createItems()
-    {
-        Room crowbar, apple, pencil, officeKey, janitorKey,
-            almightyKey, sandwich, rotApple, rotSandwich;
-      
-        // create the items
-        crowbar = new Room("Helps with prying doors open.  It " +
-                            "might even make for a good " +
-                            "backtracking tool./n/n" +
-                            "Weight: 1.32 lbs.");
-        apple = new Room("Great snack to keep the doctor away, " +
-                            "and to keep you healthy./n/n" +
-                            "Weight: 0.33 lbs.");
-        pencil = new Room("A standard No. 2 pencil.  Doesn't " +
-                            "go beyond that./n/n" +
-                            "Weight: 0.01 lbs.");
-        officeKey = new Room("Gives you access to the office." +
-                                "Weight: About 2.2 lbs.");
-        janitorKey = new Room("Gives you access to the boiler room." +
-                                "Weight: About 2.2 lbs.");
-        almightyKey = new Room("Same as the other keys, but " +
-                                "now you unlock every door in this " +
-                                "adventure!  This key has" +
-                                "no limitations!/n/n" +
-                                "Weight: About 2.2 lbs.");
-        sandwich = new Room("Bacon, lettuce, and tomato.  What " +
-                            "more can you ask for!?/n/n" +
-                            "Weight: 2.18 lbs.");
-        rotApple = new Room("A snack that wasn't touched for " +
-                            "several weeks. You want to eat a " +
-                            "decaying fruit?/n/n" +
-                            "Weight: 0.15 lbs.");
-        rotSandwich = new Room("Bacon, lettuce, and terrible!  " +
-                                "The contents are expired, and the " +
-                                "bread is moldy./n/n" +
-                                "Weight: 2.18 lbs.");
     }
     
     /**
@@ -205,6 +263,12 @@ public class Game
     private boolean processCommand(Command command) 
     {
         boolean wantToQuit = false;
+        
+        //This helps determine if you're viewing a food item,
+        //or an obtainable collectible when using the LOOK
+        //command.
+        boolean collectible = false;
+        boolean food = false;
 
         CommandWord commandWord = command.getCommandWord();
 
@@ -223,11 +287,19 @@ public class Game
                 break;
 
             case LOOK:
-                System.out.println("This is an item.");
+                if(collectible == true)
+                {
+                    System.out.println("This is an item.");
+                }
+                
+                else
+                {
+                    System.out.println("This is a food item.");
+                }
                 break;
                 
             case EAT:
-                System.out.println("It looks tasty.  Should I eat it," +
+                System.out.println("It might be tasty.  Should I eat it," +
                 " save it, or toss it?");
                 
             case QUIT:
