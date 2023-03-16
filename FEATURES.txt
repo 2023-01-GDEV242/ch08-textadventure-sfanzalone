@@ -1,0 +1,12 @@
+B Level:
+Added items to the game
+Implemented the back command
+Implement the ability to go back more than once
+
+A Level:
+One way trap doors
+Locked doors and keys
+Npcs with clues
+
+Extra Credit:
+None
