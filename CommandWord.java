@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * Representations for all the valid command words for the game
  * along with a string in a particular language.
