@@ -74,6 +74,16 @@ public class Room
     }
 
     /**
+     * Return a description of the itemm in the form:
+     *     This room contains a(n) apple.
+     * @return A long description of this item
+     */
+    public String getItemDescription()
+    {
+        return "This room contains a(n)" + description + ".\n";
+    }
+    
+    /**
      * Return a string describing the room's exits, for example
      * "Exits: north west".
      * @return Details of the room's exits.
