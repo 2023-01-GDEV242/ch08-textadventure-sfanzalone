@@ -156,7 +156,7 @@ public class Game
                             "decaying fruit?/n/n" +
                             "Weight: 0.15 lbs.");
         rotSandwich = new Room("Bacon, lettuce, and terrible!  " +
-                                "The contents expired, and the " +
+                                "The contents are expired, and the " +
                                 "bread is moldy./n/n" +
                                 "Weight: 2.18 lbs.");
     }

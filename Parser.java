@@ -10,8 +10,8 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Salvatore Anzalone
+ * @version 3/16/2023
  */
 public class Parser 
 {
@@ -42,9 +42,13 @@ public class Parser
 
         // Find up to two words on the line.
         Scanner tokenizer = new Scanner(inputLine);
-        if(tokenizer.hasNext()) {
+        
+        if(tokenizer.hasNext())
+        {
             word1 = tokenizer.next();      // get first word
-            if(tokenizer.hasNext()) {
+            
+            if(tokenizer.hasNext())
+            {
                 word2 = tokenizer.next();      // get second word
                 // note: we just ignore the rest of the input line.
             }

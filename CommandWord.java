@@ -3,14 +3,14 @@
  * along with a string in a particular language.
  * 
  * @author  Salvatore Anzalone
- * @version 3/13/2023
+ * @version 3/16/2023
  */
 public enum CommandWord
 {
     // A value for each command word along with its
     // corresponding user interface string.
     GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"),
-    LOOK("look"), EAT("eat");
+    LOOK("look"), EAT("eat"), BACK("back");
     
     // The command string.
     private String commandString;
