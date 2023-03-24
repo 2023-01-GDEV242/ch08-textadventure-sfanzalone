@@ -16,6 +16,10 @@
 
 public class Game 
 {
+    public static void main(String[] args)
+    {
+        
+    }
     private Parser parser;
     private Room currentRoom; //The current room you're in.
     private Room currentItem; //The current item you're holding.
