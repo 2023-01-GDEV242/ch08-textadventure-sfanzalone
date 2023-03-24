@@ -21,7 +21,7 @@ public class Game
         System.out.println("Welcome to the World of Zuul!");
         System.out.println();
         System.out.println("This is the main method of this " +
-                            "class,as it will take data from");
+                            "class, as the class will take data from");
         System.out.println("the Parser class, and builds off of it.");
         System.out.println();
         System.out.println("To get more details, please run the " +

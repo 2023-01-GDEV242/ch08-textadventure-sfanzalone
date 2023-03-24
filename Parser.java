@@ -11,10 +11,22 @@ import java.util.Scanner;
  * returns a command object that is marked as an unknown command.
  * 
  * @author  Salvatore Anzalone
- * @version 3/16/2023
+ * @version 3/24/2023
  */
 public class Parser 
 {
+    public static void main(String[] args)
+    {
+        System.out.println("This is the text adventure's Parser class!");
+        System.out.println();
+        System.out.println("Here, inputs, outputs, and commands " +
+                            "are managed.");
+        System.out.println();
+        System.out.println("To get more details, please run the " +
+                            "class methods outside of this main");
+        System.out.println("method.");
+    }
+    
     private CommandWords commands;  // holds all valid command words
     private Scanner reader;         // source of command input
 

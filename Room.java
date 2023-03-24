@@ -10,11 +10,23 @@ import java.util.Iterator;
  * stores a reference to the neighboring room.
  * 
  * @author  Salvatore Anzalone
- * @version 3/16/2023
+ * @version 3/24/2023
  */
 
 public class Room 
 {
+    public static void main(String[] args)
+    {
+        System.out.println("This is the text adventure's Room class!");
+        System.out.println();
+        System.out.println("This gives details on which room " +
+                            "you are currently in.");
+        System.out.println();
+        System.out.println("To get more details, please run the " +
+                            "class methods outside of this main");
+        System.out.println("method.");
+    }
+    
     private String description;
     private HashMap<String, Room> exits;  // stores exits of this room.
     private HashMap<String, Room> items;  // stores items in a room.
