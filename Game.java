@@ -11,15 +11,24 @@
  *  executes the commands that the parser returns.
  * 
  * @author  Salvatore Anzalone
- * @version 3/16/2023
+ * @version 3/24/2023
  */
 
 public class Game 
 {
     public static void main(String[] args)
     {
-        
+        System.out.println("Welcome to the World of Zuul!");
+        System.out.println();
+        System.out.println("This is the main method of this " +
+                            "class,as it will take data from");
+        System.out.println("the Parser class, and builds off of it.");
+        System.out.println();
+        System.out.println("To get more details, please run the " +
+                            "class methods outside of this main");
+        System.out.println("method.");
     }
+    
     private Parser parser;
     private Room currentRoom; //The current room you're in.
     private Room currentItem; //The current item you're holding.
